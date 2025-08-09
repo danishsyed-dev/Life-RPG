@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life RPG - Turn Your Life Into a Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="app-title">🎮 Life RPG</h1>
+            <div class="user-info">
+                <span class="user-level">Level <span id="user-level">1</span></span>
+                <div class="xp-bar-container">
+                    <div class="xp-bar">
+                        <div class="xp-progress" id="xp-progress"></div>
+                    </div>
+                    <span class="xp-text" id="xp-text">0 / 100 XP</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="dashboard">🏠 Dashboard</button>
+            <button class="nav-tab" data-tab="character">👤 Character</button>
+            <button class="nav-tab" data-tab="quests">⚔️ Quests</button>
+            <button class="nav-tab" data-tab="achievements">🏆 Achievements</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Tab -->
+            <section id="dashboard" class="tab-content active">
+                <div class="dashboard-grid">
+                    <!-- Quick Stats -->
+                    <div class="card stat-card">
+                        <h3>⚡ Quick Stats</h3>
+                        <div class="quick-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Today's XP:</span>
+                                <span class="stat-value" id="today-xp">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Streak:</span>
+                                <span class="stat-value" id="current-streak">0 days</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Quests Complete:</span>
+                                <span class="stat-value" id="quests-complete">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Active Daily Quests -->
+                    <div class="card">
+                        <h3>📋 Today's Quests</h3>
+                        <div class="quest-list" id="daily-quest-list">
+                            <!-- Daily quests will be populated here -->
+                        </div>
+                        <button class="btn btn--primary btn--sm" id="refresh-daily-quests">🔄 Refresh Daily Quests</button>
+                    </div>
+
+                    <!-- Progress Overview -->
+                    <div class="card">
+                        <h3>📈 Progress Overview</h3>
+                        <div class="progress-stats">
+                            <div class="progress-item">
+                                <span class="progress-label">Main Quests:</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="main-quest-progress"></div>
+                                </div>
+                                <span class="progress-text" id="main-quest-text">0/0</span>
+                            </div>
+                            <div class="progress-item">
+                                <span class="progress-label">Achievements:</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="achievement-progress"></div>
+                                </div>
+                                <span class="progress-text" id="achievement-text">0/6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Character Tab -->
+            <section id="character" class="tab-content">
+                <div class="character-container">
+                    <div class="card character-card">
+                        <h3>🧙‍♂️ Character Profile</h3>
+                        <div class="character-info">
+                            <div class="character-avatar">
+                                <div class="avatar-circle">
+                                    <span class="avatar-emoji" id="character-avatar">🧙‍♂️</span>
+                                </div>
+                                <button class="btn btn--secondary btn--sm" id="change-avatar">Change Avatar</button>
+                            </div>
+                            <div class="character-details">
+                                <div class="form-group">
+                                    <label class="form-label">Character Name:</label>
+                                    <input type="text" class="form-control" id="character-name" placeholder="Enter your hero name">
+                                </div>
+                                <div class="character-level-info">
+                                    <h4>Level <span id="character-level">1</span> Hero</h4>
+                                    <p>Total XP: <span id="total-xp">0</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card stats-card">
+                        <h3>📊 Character Stats</h3>
+                        <div class="stats-grid">
+                            <div class="stat-row">
+                                <div class="stat-info">
+                                    <span class="stat-icon">💪</span>
+                                    <span class="stat-name">Strength</span>
+                                    <span class="stat-level" id="strength-level">1</span>
+                                </div>
+                                <div class="stat-bar">
+                                    <div class="stat-progress" id="strength-progress"></div>
+                                </div>
+                                <span class="stat-description">Physical fitness, endurance, health habits</span>
+                            </div>
+                            <div class="stat-row">
+                                <div class="stat-info">
+                                    <span class="stat-icon">🧠</span>
+                                    <span class="stat-name">Intelligence</span>
+                                    <span class="stat-level" id="intelligence-level">1</span>
+                                </div>
+                                <div class="stat-bar">
+                                    <div class="stat-progress" id="intelligence-progress"></div>
+                                </div>
+                                <span class="stat-description">Learning, problem-solving, knowledge acquisition</span>
+                            </div>
+                            <div class="stat-row">
+                                <div class="stat-info">
+                                    <span class="stat-icon">🗣️</span>
+                                    <span class="stat-name">Charisma</span>
+                                    <span class="stat-level" id="charisma-level">1</span>
+                                </div>
+                                <div class="stat-bar">
+                                    <div class="stat-progress" id="charisma-progress"></div>
+                                </div>
+                                <span class="stat-description">Social skills, networking, communication</span>
+                            </div>
+                            <div class="stat-row">
+                                <div class="stat-info">
+                                    <span class="stat-icon">🔮</span>
+                                    <span class="stat-name">Wisdom</span>
+                                    <span class="stat-level" id="wisdom-level">1</span>
+                                </div>
+                                <div class="stat-bar">
+                                    <div class="stat-progress" id="wisdom-progress"></div>
+                                </div>
+                                <span class="stat-description">Emotional intelligence, mindfulness, decision-making</span>
+                            </div>
+                            <div class="stat-row">
+                                <div class="stat-info">
+                                    <span class="stat-icon">🎯</span>
+                                    <span class="stat-name">Dexterity</span>
+                                    <span class="stat-level" id="dexterity-level">1</span>
+                                </div>
+                                <div class="stat-bar">
+                                    <div class="stat-progress" id="dexterity-progress"></div>
+                                </div>
+                                <span class="stat-description">Adaptability, creativity, skill development</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quests Tab -->
+            <section id="quests" class="tab-content">
+                <div class="quests-container">
+                    <div class="quest-categories">
+                        <div class="card">
+                            <h3>📅 Daily Quests</h3>
+                            <div class="quest-list" id="all-daily-quests">
+                                <!-- All daily quests will be populated here -->
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <h3>🎯 Main Quests</h3>
+                            <div class="quest-list" id="main-quests">
+                                <!-- Main quests will be populated here -->
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <h3>✨ Side Quests</h3>
+                            <div class="quest-list" id="side-quests">
+                                <!-- Side quests will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>➕ Create Custom Quest</h3>
+                        <div class="custom-quest-form">
+                            <div class="form-group">
+                                <label class="form-label">Quest Name:</label>
+                                <input type="text" class="form-control" id="custom-quest-name" placeholder="Enter quest name">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Description:</label>
+                                <textarea class="form-control" id="custom-quest-description" placeholder="Describe your quest"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Category:</label>
+                                <select class="form-control" id="custom-quest-category">
+                                    <option value="Health & Fitness">Health & Fitness</option>
+                                    <option value="Learning & Education">Learning & Education</option>
+                                    <option value="Productivity & Work">Productivity & Work</option>
+                                    <option value="Social & Relationships">Social & Relationships</option>
+                                    <option value="Creative & Hobbies">Creative & Hobbies</option>
+                                    <option value="Mindfulness & Wellness">Mindfulness & Wellness</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">XP Reward:</label>
+                                <input type="number" class="form-control" id="custom-quest-xp" placeholder="10" min="5" max="100">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Quest Type:</label>
+                                <select class="form-control" id="custom-quest-type">
+                                    <option value="daily">Daily</option>
+                                    <option value="main">Main</option>
+                                    <option value="side">Side</option>
+                                </select>
+                            </div>
+                            <button class="btn btn--primary" id="create-custom-quest">Create Quest</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Achievements Tab -->
+            <section id="achievements" class="tab-content">
+                <div class="achievements-container">
+                    <div class="card">
+                        <h3>🏆 Achievements</h3>
+                        <div class="achievements-grid" id="achievements-list">
+                            <!-- Achievements will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Level Up Modal -->
+        <div id="level-up-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>🎉 LEVEL UP! 🎉</h2>
+                <p>Congratulations! You've reached level <span id="new-level"></span>!</p>
+                <p>Your stats have increased:</p>
+                <ul id="stat-increases"></ul>
+                <button class="btn btn--primary" id="close-level-up">Awesome!</button>
+            </div>
+        </div>
+
+        <!-- Achievement Unlock Modal -->
+        <div id="achievement-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>🏆 Achievement Unlocked! 🏆</h2>
+                <h3 id="achievement-name"></h3>
+                <p id="achievement-description"></p>
+                <p>+<span id="achievement-xp"></span> XP Bonus!</p>
+                <button class="btn btn--primary" id="close-achievement">Cool!</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
